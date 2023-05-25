@@ -42,7 +42,7 @@ export async function getTicketsById(req, res){
         cities destination_city ON t.destination_id = destination_city.id
       JOIN
         companies c ON t.company_id = c.id
-      WHERE t.id = $1;`, [id])
+      WHERE destination_city.id = $1;`, [id])
         res.status(200).send(tickets.rows)
 
     } catch (err) {
