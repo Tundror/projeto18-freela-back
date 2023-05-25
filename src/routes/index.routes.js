@@ -1,11 +1,10 @@
 import { Router } from "express"
-import userRouter from "./users.routes.js"
-import urlsRouter from "./urls.routes.js"
-
-
-
+import citiesRouter from "./cities.routes.js"
+import ticketsRouter from "./tickets.routes.js"
 
 const router = Router()
 
+router.use(citiesRouter)
+router.use(ticketsRouter)
 
 export default router
