@@ -39,7 +39,8 @@ CREATE TABLE hotels (
   breakfast BOOLEAN DEFAULT true,
   pool BOOLEAN DEFAULT true,
   towel BOOLEAN DEFAULT true,
-  image TEXT NOT NULL
+  image TEXT NOT NULL,
+  description TEXT NOT NULL
 );
 
 -- Inserir dados na tabela "states"

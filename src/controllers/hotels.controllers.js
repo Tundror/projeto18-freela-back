@@ -10,7 +10,9 @@ export async function getHotels(req, res) {
         h.breakfast,
         h.pool,
         h.towel,
-        h.image
+        h.image,
+        h.description,
+        h.air
       FROM
         hotels h
       JOIN
@@ -23,9 +25,10 @@ export async function getHotels(req, res) {
 }
 
 export async function getHotelsById(req, res) {
-    const id = parseInt(req.params.id)
-    try {
-        const hotels = await db.query(`SELECT
+  const id = parseInt(req.params.id);
+  try {
+    const hotels = await db.query(`
+      SELECT
         h.id,
         h.name,
         h.day_price,
@@ -33,14 +36,17 @@ export async function getHotelsById(req, res) {
         h.breakfast,
         h.pool,
         h.towel,
-        h.image
+        h.image,
+        h.description,
+        h.air
       FROM
         hotels h
       JOIN
         cities c ON h.city = c.id
-      WHERE city = $1;`, [id])
-        res.status(200).send(hotels.rows)
-    } catch (err) {
-        res.status(500).json(err.message);
-    }
+      WHERE c.id = $1;
+    `, [id]);
+    res.status(200).send(hotels.rows);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
 }
