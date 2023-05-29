@@ -77,3 +77,42 @@ export async function getHotelsByTheirId(req, res) {
     res.status(500).json(err.message);
   }
 }
+
+export async function insertHotel(req, res) {
+  try {
+    const {
+      name,
+      dayPrice,
+      city,
+      breakfast,
+      pool,
+      towel,
+      image,
+      description,
+      air,
+    } = req.body;
+
+    const query = `
+      INSERT INTO hotels (name, day_price, city, breakfast, pool, towel, image, description, air)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      RETURNING *;
+    `;
+
+    const values = [
+      name,
+      dayPrice,
+      city,
+      breakfast,
+      pool,
+      towel,
+      image,
+      description,
+      air,
+    ];
+    const result = await db.query(query, values);
+
+    res.status(200).send(result.rows[0]);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+}

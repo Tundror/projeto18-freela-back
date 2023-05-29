@@ -75,3 +75,22 @@ export async function getTicketsByTheirId(req, res){
       res.status(500).json(err.message);
   }
 }
+
+export async function insertTickets(req, res) {
+  try {
+    const { departureId, destinationId, time, price, companyId } = req.body;
+
+    const query = `
+      INSERT INTO tickets (departure_id, destination_id, time, price, company_id)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *;
+    `;
+
+    const values = [departureId, destinationId, time, price, companyId];
+    const result = await db.query(query, values);
+
+    res.status(200).send(result.rows[0]);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+}

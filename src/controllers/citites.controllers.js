@@ -26,3 +26,22 @@ export async function getCitiesById(req, res) {
         res.status(500).json(err.message);
     }
 }
+
+export async function insertCity(req, res) {
+    try {
+      const { name, stateId } = req.body;
+  
+      const query = `
+        INSERT INTO cities (name, state_id)
+        VALUES ($1, $2)
+        RETURNING *;
+      `;
+  
+      const values = [name, stateId];
+      const result = await db.query(query, values);
+  
+      res.status(200).send(result.rows[0]);
+    } catch (err) {
+      res.status(500).json(err.message);
+    }
+  }
