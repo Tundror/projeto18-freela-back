@@ -33,13 +33,14 @@ SELECT * FROM tickets;
 -- Tabela "hotels"
 CREATE TABLE hotels (
   id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL,
-  day_price DECIMAL(10, 2) NOT NULL,
-  city INTEGER REFERENCES cities (id) NOT NULL,
-  breakfast BOOLEAN DEFAULT true,
-  pool BOOLEAN DEFAULT true,
-  towel BOOLEAN DEFAULT true,
+  name VARCHAR(100) NOT NULL,
+  day_price NUMERIC(10, 2) NOT NULL,
+  city INTEGER NOT NULL,
+  breakfast BOOLEAN NOT NULL,
+  pool BOOLEAN NOT NULL,
+  towel BOOLEAN NOT NULL,
   image TEXT NOT NULL,
+  air BOOLEAN NOT NULL,
   description TEXT NOT NULL
 );
 
@@ -78,15 +79,16 @@ INSERT INTO tickets (departure_id, destination_id, time, price, company_id) VALU
   
  SELECT * FROM tickets;
  
- INSERT INTO hotels (name, day_price, city, breakfast, pool, towel, image)
+INSERT INTO hotels (name, day_price, city, breakfast, pool, towel, image, air, description)
 VALUES
-  ('Hotel Estrela do Norte', 150.00, 1, true, true, true, 'https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768'),
-  ('Mar Azul Resort', 200.00, 1, true, true, true, 'https://cf.bstatic.com/xdata/images/hotel/max500/393403451.jpg?k=9399734485ff7073535378e863c436cae8ab2c760d1131820eb8cdd7bb18751a&o=&hp=1'),
-  ('Pousada Primavera', 180.00, 2, true, true, true, 'https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg'),
-  ('Grand Palace Hotel', 220.00, 2, true, true, true, 'https://delmond.com.br/wp-content/uploads/2023/01/SNT_7138.jpg'),
-  ('Hotel Sol Poente', 190.00, 3, true, true, true, 'https://www.ahstatic.com/photos/c096_ho_00_p_1024x768.jpg'),
-  ('Villa Serenidade', 240.00, 3, true, true, true, 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Bellagio.jpg/1200px-Bellagio.jpg'),
-  ('Golden Sands Resort', 175.00, 4, true, true, true, 'https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_871,h_581/https://blog.hotelpontaverde.com.br/wp-content/uploads/2019/09/Resort-ou-Hotel-Hotel-Ponta-Verde-France%CC%82s.png'),
-  ('Hotel Montanha Encantada', 210.00, 4, true, true, true, 'https://www.melhoresdestinos.com.br/wp-content/uploads/2021/05/hotel-colline-de-france-capa-01.jpg');
+  ('Hotel Estrela do Norte', 150.00, 1, true, true, true, 'https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?ca=6&ce=1&s=1024x768', true, 'Desfrute de uma estadia luxuosa e confortável neste encantador hotel, localizado no coração da cidade. Com quartos elegantes, comodidades modernas e um serviço excepcional, você encontrará tudo o que precisa para uma experiência memorável.'),
+  ('Mar Azul Resort', 200.00, 1, true, true, true, 'https://cf.bstatic.com/xdata/images/hotel/max500/393403451.jpg?k=9399734485ff7073535378e863c436cae8ab2c760d1131820eb8cdd7bb18751a&o=&hp=1', true, 'Este resort à beira-mar é o refúgio perfeito para relaxar e aproveitar as belas praias e paisagens. Com uma ampla gama de atividades e serviços, incluindo restaurantes, piscinas e spa, você terá uma estadia inesquecível.'),
+  ('Pousada Primavera', 180.00, 2, true, true, true, 'https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg', true, 'Sinta-se em casa nesta encantadora pousada, cercada por uma paisagem deslumbrante. Com quartos acolhedores, ambiente tranquilo e uma equipe amigável, você encontrará o refúgio perfeito para relaxar e recarregar as energias.'),
+  ('Grand Palace Hotel', 220.00, 2, true, true, true, 'https://delmond.com.br/wp-content/uploads/2023/01/SNT_7138.jpg', true, 'Experimente o luxo e o glamour neste hotel de primeira classe. Com quartos espaçosos e elegantemente decorados, restaurantes gourmet e instalações de lazer de última geração, você será mimado com uma experiência de alto nível.'),
+  ('Hotel Sol Poente', 190.00, 3, true, true, true, 'https://www.ahstatic.com/photos/c096_ho_00_p_1024x768.jpg', true, 'Aproveite a vista panorâmica deste hotel situado no topo de uma montanha. Com quartos confortáveis e uma atmosfera tranquila, você poderá desfrutar de momentos de paz e serenidade em meio à natureza deslumbrante.'),
+  ('Villa Serenidade', 240.00, 3, true, true, true, 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Bellagio.jpg/1200px-Bellagio.jpg', true, 'Descubra o paraíso neste resort à beira-mar, onde o sol, a areia e o mar se encontram. Com uma variedade de atividades aquáticas, entretenimento ao vivo e opções gastronômicas, você terá uma experiência tropical inesquecível.'),
+  ('Golden Sands Resort', 175.00, 4, true, true, true, 'https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_871,h_581/https://blog.hotelpontaverde.com.br/wp-content/uploads/2019/09/Resort-ou-Hotel-Hotel-Ponta-Verde-France%CC%82s.png', true, 'Relaxe e recupere as energias neste retiro de luxo, cercado por belos jardins e paisagens exuberantes. Com quartos espaçosos, spa rejuvenescedor e instalações de bem-estar, você encontrará o equilíbrio perfeito entre corpo e mente.'),
+  ('Hotel Montanha Encantada', 210.00, 4, true, true, true, 'https://www.melhoresdestinos.com.br/wp-content/uploads/2021/05/hotel-colline-de-france-capa-01.jpg', true, 'Desfrute de uma estadia elegante neste hotel moderno e sofisticado. Com design contemporâneo, serviços personalizados e uma localização central, você estará no centro das principais atrações e atividades da cidade.');
+
   
   SELECT * FROM hotels;
